@@ -3,6 +3,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:mockito/mockito.dart';
 import 'package:weader/core/error/exception.dart';
 import 'package:weader/features/locations/data/data_sources/locations_data_source.dart';
+import 'package:weader/features/locations/data/models/location_model.dart';
 import 'package:weader/features/locations/data/models/locations_list_model.dart';
 import '../../../fixtures/locations_list_fixture.dart';
 import 'package:matcher/matcher.dart';

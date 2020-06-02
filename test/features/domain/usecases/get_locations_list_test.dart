@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:weader/core/entities/entities.dart';
 import 'package:weader/features/locations/domain/entities/locations_list.dart';
 import 'package:weader/features/locations/domain/repository/locations_repository.dart';
 import 'package:weader/features/locations/domain/usecases/get_locations_list.dart';

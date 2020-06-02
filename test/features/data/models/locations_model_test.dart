@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:weader/features/locations/data/models/location_model.dart';
 import 'package:weader/features/locations/data/models/locations_list_model.dart';
 import 'package:weader/features/locations/domain/entities/locations_list.dart';
 

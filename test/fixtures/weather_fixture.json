@@ -1,0 +1,86 @@
+{
+    "lat": 23.63,
+    "lon": 85.33,
+    "timezone": "Asia/Kolkata",
+    "current": {
+        "dt": 1589393784,
+        "sunrise": 1589326660,
+        "sunset": 1589374350,
+        "temp": 24,
+        "feels_like": 27.27,
+        "pressure": 1010,
+        "humidity": 83,
+        "dew_point": 20.93,
+        "uvi": 12.5,
+        "clouds": 40,
+        "visibility": 3500,
+        "wind_speed": 1.26,
+        "wind_deg": 209,
+        "weather": [
+            {
+                "id": 721,
+                "main": "Haze",
+                "description": "haze",
+                "icon": "50n"
+            }
+        ]
+    },
+    "hourly": [
+        {
+            "dt": 1589392800,
+            "temp": 24,
+            "feels_like": 27.27,
+            "pressure": 1010,
+            "humidity": 83,
+            "dew_point": 20.93,
+            "clouds": 40,
+            "wind_speed": 1.26,
+            "wind_deg": 209,
+            "weather": [
+                {
+                    "id": 802,
+                    "main": "Clouds",
+                    "description": "scattered clouds",
+                    "icon": "03n"
+                }
+            ]
+        }
+
+    ],
+    "daily": [
+        {
+            "dt": 1589347800,
+            "sunrise": 1589326660,
+            "sunset": 1589374350,
+            "temp": {
+                "day": 24,
+                "min": 24,
+                "max": 24,
+                "night": 24,
+                "eve": 24,
+                "morn": 24
+            },
+            "feels_like": {
+                "day": 27.27,
+                "night": 27.27,
+                "eve": 27.27,
+                "morn": 27.27
+            },
+            "pressure": 1010,
+            "humidity": 83,
+            "dew_point": 20.93,
+            "wind_speed": 1.26,
+            "wind_deg": 209,
+            "weather": [
+                {
+                    "id": 802,
+                    "main": "Clouds",
+                    "description": "scattered clouds",
+                    "icon": "03n"
+                }
+            ],
+            "clouds": 40,
+            "uvi": 12.5
+        }
+    ]
+}

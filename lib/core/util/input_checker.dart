@@ -10,8 +10,3 @@ class InputChecker {
       return Left(InvalidInputFailure());
   }
 }
-
-class InvalidInputFailure extends Failure {
-  @override
-  List<Object> get props => [];
-}

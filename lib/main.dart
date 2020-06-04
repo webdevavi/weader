@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'Weader',
       theme: ThemeData(
         primaryColor: Colors.deepOrange,
+        primaryColorDark: Colors.deepOrange.shade800,
         accentColor: Colors.teal,
       ),
       home: SearchPage(),

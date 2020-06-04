@@ -22,48 +22,46 @@ class _SearchBarState extends State<SearchBar> {
       color: Colors.deepOrange,
       child: Padding(
         padding: const EdgeInsets.all(4.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            BackButton(
-              color: Colors.white,
-              onPressed: () {},
-            ),
-            Expanded(
-              child: TextField(
-                controller: controller,
-                focusNode: focus,
-                textInputAction: TextInputAction.search,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  labelText: "Search location",
-                  labelStyle: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18.0,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(100.0),
+          child: Material(
+            color: Theme.of(context).primaryColorDark,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Expanded(
+                  child: TextField(
+                    controller: controller,
+                    focusNode: focus,
+                    textInputAction: TextInputAction.search,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.symmetric(horizontal: 18.0),
+                      border: InputBorder.none,
+                      hintText: "Search",
+                      hintStyle: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18.0,
+                      ),
+                    ),
+                    cursorColor: Colors.white,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16.0,
+                    ),
+                    onChanged: (value) => setState(() {
+                      query = value;
+                    }),
+                    onSubmitted: (_) => _addGetLocations(query),
                   ),
                 ),
-                cursorColor: Colors.white,
-                style: TextStyle(
+                IconButton(
+                  icon: Icon(Icons.search),
                   color: Colors.white,
-                  fontSize: 16.0,
+                  onPressed: () => _addGetLocations(query),
                 ),
-                onChanged: (value) => setState(() {
-                  query = value;
-                }),
-                onSubmitted: (_) => _addGetLocations(query),
-              ),
+              ],
             ),
-            IconButton(
-              icon: Icon(Icons.search),
-              color: Colors.white,
-              onPressed: () => _addGetLocations(query),
-            ),
-            IconButton(
-              icon: Icon(Icons.my_location),
-              color: Colors.white,
-              onPressed: () => _addGetDeviceLocations(),
-            ),
-          ],
+          ),
         ),
       ),
     );

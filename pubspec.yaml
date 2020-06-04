@@ -20,6 +20,10 @@ dependencies:
   http: ^0.12.1
   equatable: ^1.2.0
   geolocator: ^5.3.1
+  timezone: ^0.5.7
+  intl: ^0.16.1
+  flutter_svg: ^0.17.4
+  transparent_image: ^1.0.0
 
 dev_dependencies:
   flutter_test:
@@ -32,3 +36,7 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
+
+  assets:
+    - packages/timezone/data/2020a.tzf
+    - icons/

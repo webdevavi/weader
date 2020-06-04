@@ -8,25 +8,33 @@ class ErrorDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      alignment: Alignment.topCenter,
-      padding: EdgeInsets.only(top: 24.0),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Icon(
-            Icons.info_outline,
-            color: Colors.redAccent,
-          ),
-          SizedBox(
-            height: 10.0,
-          ),
-          Text(
-            message + '!',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 16.0,
-              fontWeight: FontWeight.bold,
-              color: Colors.redAccent,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Column(
+                children: <Widget>[
+                  Icon(
+                    Icons.info_outline,
+                    color: Colors.redAccent,
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Text(
+                    message + '!',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.redAccent,
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ],
       ),

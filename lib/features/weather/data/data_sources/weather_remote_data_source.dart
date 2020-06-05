@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 import 'package:weader/core/error/exception.dart';
+import 'package:weader/core/keys/keys.dart';
 
 import '../models/weather_models.dart';
 
@@ -30,7 +31,7 @@ class WeatherRemoteDataSourceImpl implements WeatherRemoteDataSource {
       "lon": longitude.toString(),
       "units": "metric",
       "exclude": "minutely",
-      "appid": "b3a2e8e9577ff98b717f6a07724553aa",
+      "appid": OPENWEATHERMAP,
     };
 
     final url = Uri.https(
@@ -39,15 +40,19 @@ class WeatherRemoteDataSourceImpl implements WeatherRemoteDataSource {
       queries,
     );
 
-    final response = await client.get(url);
+    try {
+      final response = await client.get(url);
 
-    if (response.statusCode == 200)
-      return FullWeatherModel.fromJson(
-        json.decode(
-          response.body,
-        ),
-      );
-    else
+      if (response.statusCode == 200)
+        return FullWeatherModel.fromJson(
+          json.decode(
+            response.body,
+          ),
+        );
+      else
+        throw ServerException();
+    } on Exception {
       throw ServerException();
+    }
   }
 }

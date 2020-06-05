@@ -24,7 +24,7 @@ enum Wallpaper {
 }
 
 class Settings {
-  final Unit unit = Unit.IMPERIAL;
+  final Unit unit = Unit.METRIC;
   final TimeFormat timeFormat = TimeFormat.HOURS12;
   final DataPreference dataPreference = DataPreference.TIMEZONE_SPECIFIC;
   final CurrentTheme theme = CurrentTheme.LIGHT;

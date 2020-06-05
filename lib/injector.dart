@@ -8,6 +8,9 @@ import 'package:weader/core/network/network_info.dart';
 import 'package:weader/features/locations/data/data_sources/locations_data_source.dart';
 import 'package:weader/features/locations/data/repository/locations_repository_impl.dart';
 import 'package:weader/features/locations/domain/repository/locations_repository.dart';
+import 'package:weader/features/time_aware_wallpaper/domain/repository/time_aware_wallpaper_repository.dart';
+import 'package:weader/features/time_aware_wallpaper/domain/usecases/get_wallpaper.dart';
+import 'package:weader/features/time_aware_wallpaper/presentation/bloc/bloc.dart';
 import 'package:weader/features/weather/data/data_sources/weather_remote_data_source.dart';
 import 'package:weader/features/weather/data/repositories/weather_repository_impl.dart';
 import 'package:weader/features/weather/domain/repositories/weather_repository.dart';
@@ -20,6 +23,8 @@ import 'core/util/unit_converter.dart';
 import 'features/locations/domain/usecases/get_device_locations_list.dart';
 import 'features/locations/domain/usecases/get_locations_list.dart';
 import 'features/locations/presentation/bloc/bloc.dart';
+import 'features/time_aware_wallpaper/data/datasources/time_aware_wallpaper_remote_data_source.dart';
+import 'features/time_aware_wallpaper/data/repository/time_aware_wallpaper_repository_impl.dart';
 
 final GetIt getIt = GetIt.instance;
 
@@ -105,6 +110,36 @@ Future<void> init() async {
   // datasources
   getIt.registerLazySingleton<WeatherRemoteDataSource>(
     () => WeatherRemoteDataSourceImpl(
+      client: getIt(),
+    ),
+  );
+
+  //! Features - Time Aware Wallpaper
+  // BLoC
+  getIt.registerFactory(
+    () => TimeAwareWallpaperBloc(
+      getIt(),
+    ),
+  );
+
+  // usecase
+  getIt.registerLazySingleton(
+    () => GetWallpaper(
+      getIt(),
+    ),
+  );
+
+  // repository
+  getIt.registerLazySingleton<TimeAwareWallpaperRepository>(
+    () => TimeAwareWallpaperRepositoryImpl(
+      remoteDataSource: getIt(),
+      networkInfo: getIt(),
+    ),
+  );
+
+  // datasources
+  getIt.registerLazySingleton<TimeAwareWallpaperRemoteDataSource>(
+    () => TimeAwareWallpaperRemoteDataSourceImpl(
       client: getIt(),
     ),
   );

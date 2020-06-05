@@ -84,6 +84,7 @@ final tDaily = [
 final tFullWeatherModel = FullWeatherModel(
   timezone: 'Asia/Kolkata',
   daytime: "night",
+  timezoneSpecificDaytime: "night",
   sunrise: '5:07 AM',
   sunriseIn24: '05:07',
   sunset: '6:22 PM',

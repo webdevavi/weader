@@ -1,7 +1,5 @@
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
-import 'package:timezone/timezone.dart';
 import 'package:weader/core/util/datetime_converter.dart';
 import 'package:weader/core/util/unit_converter.dart';
 
@@ -11,6 +9,7 @@ import '../../domain/entities/weather_entities.dart';
 class FullWeatherModel extends FullWeather {
   final String timezone;
   final String daytime;
+  final String timezoneSpecificDaytime;
   final String sunrise;
   final String sunriseIn24;
   final String timezoneSpecificSunrise;
@@ -26,6 +25,7 @@ class FullWeatherModel extends FullWeather {
   FullWeatherModel({
     @required this.timezone,
     @required this.daytime,
+    @required this.timezoneSpecificDaytime,
     @required this.sunrise,
     @required this.sunriseIn24,
     @required this.sunset,
@@ -94,46 +94,10 @@ class FullWeatherModel extends FullWeather {
       return 'mid';
     }
 
-    String getDayTime(int timestamp) {
-      final DateTime _dateTime = dtc.convertUnixToHuman(timestamp);
+    String daytime(int timestamp) => dtc.getDayTime(timestamp);
 
-      //4:00 - 7:30 sunrise
-      if (_dateTime.isAfter(DateTime(
-              _dateTime.year, _dateTime.month, _dateTime.day, 4, 00)) &&
-          _dateTime.isBefore(
-              DateTime(_dateTime.year, _dateTime.month, _dateTime.day, 7, 30)))
-        return 'sunrise';
-
-      //7:30 - 12:00 morning
-      if (_dateTime.isAfter(DateTime(
-              _dateTime.year, _dateTime.month, _dateTime.day, 7, 30)) &&
-          _dateTime.isBefore(
-              DateTime(_dateTime.year, _dateTime.month, _dateTime.day, 12, 00)))
-        return 'morning';
-      //12:00 - 16:00 afternoon
-      if (_dateTime.isAfter(DateTime(
-              _dateTime.year, _dateTime.month, _dateTime.day, 12, 00)) &&
-          _dateTime.isBefore(
-              DateTime(_dateTime.year, _dateTime.month, _dateTime.day, 16, 00)))
-        return 'afternoon';
-
-      //16:00 - 18:00 evening
-      if (_dateTime.isAfter(DateTime(
-              _dateTime.year, _dateTime.month, _dateTime.day, 16, 00)) &&
-          _dateTime.isBefore(
-              DateTime(_dateTime.year, _dateTime.month, _dateTime.day, 18, 00)))
-        return 'evening';
-
-      //18:00 - 19:00 sunset
-      if (_dateTime.isAfter(DateTime(
-              _dateTime.year, _dateTime.month, _dateTime.day, 18, 00)) &&
-          _dateTime.isBefore(
-              DateTime(_dateTime.year, _dateTime.month, _dateTime.day, 19, 00)))
-        return 'sunset';
-
-      //7 AM - 4AM night
-      return 'night';
-    }
+    String daytimeTZ(int timestamp) =>
+        dtc.getDaytimeTZ(timestamp, json['timezone']);
 
     // For tests
     void printAll(FullWeatherModel model) {
@@ -302,7 +266,8 @@ class FullWeatherModel extends FullWeather {
 
     final model = FullWeatherModel(
       timezone: json['timezone'],
-      daytime: getDayTime(json['current']['dt']),
+      daytime: daytime(json['current']['dt']),
+      timezoneSpecificDaytime: daytimeTZ(json['current']['dt']),
       sunrise: unix(json['current']['sunrise']),
       sunriseIn24: unix24(json['current']['sunrise']),
       sunset: unix(json['current']['sunset']),

@@ -39,10 +39,14 @@ class LocationsDataSourceImpl implements LocationsDataSource {
 
   @override
   Future<LocationsListModel> getLocationsList(String queryString) async {
-    final placemarks = await geolocator.placemarkFromAddress(queryString);
-    if (placemarks != null)
-      return LocationsListModel.fromData(placemarks);
-    else
+    try {
+      final placemarks = await geolocator.placemarkFromAddress(queryString);
+      if (placemarks != null)
+        return LocationsListModel.fromData(placemarks);
+      else
+        throw NotFoundException();
+    } on Exception {
       throw NotFoundException();
+    }
   }
 }

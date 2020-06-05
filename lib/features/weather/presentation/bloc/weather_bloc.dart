@@ -10,14 +10,14 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   WeatherBloc(this.getWeather) : assert(getWeather != null);
 
   @override
-  WeatherState get initialState => Empty();
+  WeatherState get initialState => WeatherEmpty();
 
   @override
   Stream<WeatherState> mapEventToState(
     WeatherEvent event,
   ) async* {
     if (event is GetWeatherEvent) {
-      yield Loading();
+      yield WeatherLoading();
 
       final weatherEither = await getWeather(
         Params(
@@ -27,9 +27,9 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       );
 
       yield* weatherEither.fold((failure) async* {
-        yield Error(message: mapFailureToMessage(failure));
+        yield WeatherError(message: mapFailureToMessage(failure));
       }, (weather) async* {
-        yield Loaded(weather: weather);
+        yield WeatherLoaded(weather: weather);
       });
     }
   }

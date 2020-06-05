@@ -38,7 +38,7 @@ void main() {
 
   test('initialState should be Empty', () {
     // assert
-    expect(locationsBloc.initialState, equals(Empty()));
+    expect(locationsBloc.initialState, equals(LocationsEmpty()));
   });
 
   final String tQueryString = 'bengaluru';
@@ -86,7 +86,7 @@ void main() {
       ),
       act: (bloc) => bloc.add(GetLocationsListEvent(tQueryString)),
       expect: [
-        Error(message: INVALID_INPUT_FAILURE_MESSAGE),
+        LocationsError(message: INVALID_INPUT_FAILURE_MESSAGE),
       ],
     );
 
@@ -115,8 +115,8 @@ void main() {
       ),
       act: (bloc) => bloc.add(GetLocationsListEvent(tQueryString)),
       expect: [
-        Loading(),
-        Loaded(locationsList: tLocationsList),
+        LocationsLoading(),
+        LocationsLoaded(locationsList: tLocationsList),
       ],
     );
 
@@ -131,8 +131,8 @@ void main() {
       ),
       act: (bloc) => bloc.add(GetLocationsListEvent(tQueryString)),
       expect: [
-        Loading(),
-        Error(message: NOT_FOUND_FAILURE_MESSAGE),
+        LocationsLoading(),
+        LocationsError(message: NOT_FOUND_FAILURE_MESSAGE),
       ],
     );
   });
@@ -160,8 +160,8 @@ void main() {
       ),
       act: (bloc) => bloc.add(GetDeviceLocationsListEvent()),
       expect: [
-        Loading(),
-        Loaded(locationsList: tLocationsList),
+        LocationsLoading(),
+        LocationsLoaded(locationsList: tLocationsList),
       ],
     );
 
@@ -175,8 +175,8 @@ void main() {
       ),
       act: (bloc) => bloc.add(GetDeviceLocationsListEvent()),
       expect: [
-        Loading(),
-        Error(message: DEVICE_LOCATION_FAILURE_MESSAGE),
+        LocationsLoading(),
+        LocationsError(message: DEVICE_LOCATION_FAILURE_MESSAGE),
       ],
     );
 
@@ -190,8 +190,8 @@ void main() {
       ),
       act: (bloc) => bloc.add(GetDeviceLocationsListEvent()),
       expect: [
-        Loading(),
-        Error(message: NOT_FOUND_FAILURE_MESSAGE),
+        LocationsLoading(),
+        LocationsError(message: NOT_FOUND_FAILURE_MESSAGE),
       ],
     );
   });

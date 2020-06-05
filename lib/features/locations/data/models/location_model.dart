@@ -48,6 +48,15 @@ class LocationModel extends Location {
         longitude: data.position.longitude);
   }
 
+  factory LocationModel.fromJson(Map<String, dynamic> json) {
+    return LocationModel(
+      address: json['address'],
+      displayName: json['display_name'],
+      latitude: json['latitude'],
+      longitude: json['longitude'],
+    );
+  }
+
   Map<String, dynamic> toJson() {
     return {
       "address": address,

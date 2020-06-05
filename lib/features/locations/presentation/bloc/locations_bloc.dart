@@ -26,7 +26,7 @@ class LocationsBloc extends Bloc<LocationsEvent, LocationsState> {
         assert(inputChecker != null);
 
   @override
-  LocationsState get initialState => Empty();
+  LocationsState get initialState => LocationsEmpty();
 
   @override
   Stream<LocationsState> mapEventToState(
@@ -37,10 +37,10 @@ class LocationsBloc extends Bloc<LocationsEvent, LocationsState> {
 
       yield* inputEither.fold(
         (failure) async* {
-          yield Error(message: INVALID_INPUT_FAILURE_MESSAGE);
+          yield LocationsError(message: INVALID_INPUT_FAILURE_MESSAGE);
         },
         (string) async* {
-          yield Loading();
+          yield LocationsLoading();
           final locationsListEither =
               await getLocationsList(Params(queryString: string));
 
@@ -48,7 +48,7 @@ class LocationsBloc extends Bloc<LocationsEvent, LocationsState> {
         },
       );
     } else if (event is GetDeviceLocationsListEvent) {
-      yield Loading();
+      yield LocationsLoading();
       final deviceLocationsListEither =
           await getDeviceLocationsList(NoParams());
 
@@ -60,8 +60,8 @@ class LocationsBloc extends Bloc<LocationsEvent, LocationsState> {
     Either<Failure, LocationsList> either,
   ) async* {
     yield either.fold(
-      (failure) => Error(message: mapFailureToMessage(failure)),
-      (locationsList) => Loaded(locationsList: locationsList),
+      (failure) => LocationsError(message: mapFailureToMessage(failure)),
+      (locationsList) => LocationsLoaded(locationsList: locationsList),
     );
   }
 }

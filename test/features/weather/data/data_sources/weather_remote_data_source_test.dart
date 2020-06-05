@@ -5,6 +5,7 @@ import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
 import 'package:timezone/timezone.dart';
 import 'package:weader/core/error/exception.dart';
+import 'package:weader/core/keys/keys.dart';
 import 'package:weader/features/weather/data/data_sources/weather_remote_data_source.dart';
 
 import '../../../../fixtures/fixture_reader.dart';
@@ -55,7 +56,7 @@ void main() {
         "lon": tLongitude.toString(),
         "units": "metric",
         "exclude": "minutely",
-        "appid": "b3a2e8e9577ff98b717f6a07724553aa",
+        "appid": OPENWEATHERMAP
       };
       final url = Uri.https(
         "api.openweathermap.org",

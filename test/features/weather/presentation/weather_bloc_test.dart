@@ -23,7 +23,7 @@ void main() {
     test(
       'initial state should be empty',
       () {
-        expect(bloc.initialState, equals(Empty()));
+        expect(bloc.initialState, equals(WeatherEmpty()));
       },
     );
 
@@ -142,8 +142,8 @@ void main() {
             ),
           ),
           expect: [
-            Loading(),
-            Loaded(weather: tFullWeather),
+            WeatherLoading(),
+            WeatherLoaded(weather: tFullWeather),
           ],
         );
 
@@ -164,8 +164,8 @@ void main() {
             ),
           ),
           expect: [
-            Loading(),
-            Error(
+            WeatherLoading(),
+            WeatherError(
               message: SERVER_FAILURE_MESSAGE,
             ),
           ],

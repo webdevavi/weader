@@ -8,28 +8,28 @@ abstract class LocationsState extends Equatable {
   LocationsState();
 }
 
-class Empty extends LocationsState {
+class LocationsEmpty extends LocationsState {
   @override
   List<Object> get props => [];
 }
 
-class Loading extends LocationsState {
+class LocationsLoading extends LocationsState {
   @override
   List<Object> get props => [];
 }
 
-class Loaded extends LocationsState {
+class LocationsLoaded extends LocationsState {
   final LocationsList locationsList;
 
-  Loaded({@required this.locationsList});
+  LocationsLoaded({@required this.locationsList});
   @override
   List<Object> get props => [locationsList];
 }
 
-class Error extends LocationsState {
+class LocationsError extends LocationsState {
   final String message;
 
-  Error({@required this.message});
+  LocationsError({@required this.message});
   @override
   List<Object> get props => [message];
 }

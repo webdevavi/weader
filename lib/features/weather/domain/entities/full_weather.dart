@@ -5,6 +5,7 @@ import './weather_entities.dart';
 class FullWeather extends Equatable {
   final String timezone;
   final String daytime;
+  final String timezoneSpecificDaytime;
   final String sunrise;
   final String sunriseIn24;
   final String timezoneSpecificSunrise;
@@ -20,6 +21,7 @@ class FullWeather extends Equatable {
   FullWeather({
     @required this.timezone,
     @required this.daytime,
+    @required this.timezoneSpecificDaytime,
     @required this.sunrise,
     @required this.sunriseIn24,
     @required this.sunset,
@@ -37,6 +39,7 @@ class FullWeather extends Equatable {
   List<Object> get props => [
         timezone,
         daytime,
+        timezoneSpecificDaytime,
         sunrise,
         sunriseIn24,
         timezoneSpecificSunrise,

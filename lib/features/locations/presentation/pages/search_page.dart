@@ -16,15 +16,15 @@ class SearchPage extends StatelessWidget {
           appBar: SearchBar(),
           body: BlocBuilder<LocationsBloc, LocationsState>(
             builder: (context, state) {
-              if (state is Empty) {
+              if (state is LocationsEmpty) {
                 return Container();
-              } else if (state is Loading) {
+              } else if (state is LocationsLoading) {
                 return LinearProgressIndicator();
-              } else if (state is Loaded) {
+              } else if (state is LocationsLoaded) {
                 return LocationsListDisplay(
                   locationsList: state.locationsList.locationsList,
                 );
-              } else if (state is Error) {
+              } else if (state is LocationsError) {
                 return ErrorDisplay(
                   message: state.message,
                 );

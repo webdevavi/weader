@@ -33,6 +33,16 @@ class InvalidInputFailure extends Failure {
   List<Object> get props => [];
 }
 
+class NoLocalDataFailure extends Failure {
+  @override
+  List<Object> get props => [];
+}
+
+class UnexpectedFailure extends Failure {
+  @override
+  List<Object> get props => [];
+}
+
 const SERVER_FAILURE_MESSAGE = 'Server Error';
 const NETWORK_FAILURE_MESSAGE = 'Network Error';
 const CACHE_FAILURE_MESSAGE = 'Cache Error';
@@ -40,6 +50,7 @@ const NOT_FOUND_FAILURE_MESSAGE = 'Location Not Found';
 const DEVICE_LOCATION_FAILURE_MESSAGE = 'Device Location Service Error';
 const INVALID_INPUT_FAILURE_MESSAGE = 'Invalid Input';
 const UNEXPECTED_FAILURE_MESSAGE = 'Unexpected Error';
+const NO_LOCAL_DATA_FAILURE_MESSAGE = 'No Data';
 
 String mapFailureToMessage(Failure failure) {
   switch (failure.runtimeType) {
@@ -55,6 +66,9 @@ String mapFailureToMessage(Failure failure) {
       return DEVICE_LOCATION_FAILURE_MESSAGE;
     case InvalidInputFailure:
       return INVALID_INPUT_FAILURE_MESSAGE;
+    case NoLocalDataFailure:
+      return NO_LOCAL_DATA_FAILURE_MESSAGE;
+    case UnexpectedFailure:
     default:
       return UNEXPECTED_FAILURE_MESSAGE;
   }

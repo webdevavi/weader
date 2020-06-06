@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:weader/core/entities/entities.dart';
-import 'package:weader/core/settings/settings.dart';
-import 'package:weader/features/weather/domain/entities/weather_entities.dart';
-import 'package:weader/features/weather/presentation/widgets/weather_widgets.dart';
+
+import '../../../../core/entities/entities.dart';
+import '../../../../core/entities/settings.dart';
+import '../../domain/entities/weather_entities.dart';
+import 'weather_widgets.dart';
 
 class FullWeatherDisplay extends StatelessWidget {
   const FullWeatherDisplay({
@@ -37,25 +38,8 @@ class FullWeatherDisplay extends StatelessWidget {
                     weather: weather,
                     settings: settings,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: Container(
-                      child: Row(
-                        children: <Widget>[
-                          Text(
-                            "Forecast for next 7 days",
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Icon(
-                            Icons.arrow_drop_down,
-                            color: Colors.white70,
-                          ),
-                        ],
-                      ),
-                    ),
+                  SizedBox(
+                    height: 8.0,
                   ),
                   Expanded(
                     child: DailyWeatherDisplay(

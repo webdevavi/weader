@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/settings/settings.dart';
+import '../../../../core/entities/settings.dart';
 import '../../domain/entities/weather_entities.dart';
 
 class HourlyWeatherDisplay extends StatelessWidget {
@@ -24,26 +24,26 @@ class HourlyWeatherDisplay extends StatelessWidget {
     void setUp(index) {
       icon = hourlyWeather[index].icon;
       temperatureIcon = hourlyWeather[index].temperatureIcon;
-      if (settings.dataPreference == DataPreference.LOCAL) {
+      if (settings.dataPreference == DataPreference(isLocal: true)) {
         day = hourlyWeather[index].day;
-        if (settings.timeFormat == TimeFormat.HOURS24) {
+        if (settings.timeFormat == TimeFormat(is24Hours: true)) {
           dateTime = hourlyWeather[index].dateTimeIn24;
-        } else if (settings.timeFormat == TimeFormat.HOURS12) {
+        } else {
           dateTime = hourlyWeather[index].dateTime;
         }
-      } else if (settings.dataPreference == DataPreference.TIMEZONE_SPECIFIC) {
+      } else {
         day = hourlyWeather[index].timezoneSpecificDay;
-        if (settings.timeFormat == TimeFormat.HOURS24) {
+        if (settings.timeFormat == TimeFormat(is24Hours: true)) {
           dateTime = hourlyWeather[index].timezoneSpecificDateTimeIn24;
-        } else if (settings.timeFormat == TimeFormat.HOURS12) {
+        } else {
           dateTime = hourlyWeather[index].timezoneSpecificDateTime;
         }
       }
 
-      if (settings.unit == Unit.METRIC) {
-        temperature = hourlyWeather[index].temperature;
-      } else if (settings.unit == Unit.IMPERIAL) {
+      if (settings.unitSystem == UnitSystem(isImperial: true)) {
         temperature = hourlyWeather[index].temperatureAsF;
+      } else {
+        temperature = hourlyWeather[index].temperature;
       }
     }
 
@@ -59,7 +59,7 @@ class HourlyWeatherDisplay extends StatelessWidget {
               borderRadius: BorderRadius.circular(4.0),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(4.0),
               child: Column(
                 children: <Widget>[
                   Container(
@@ -72,25 +72,24 @@ class HourlyWeatherDisplay extends StatelessWidget {
                       width: 30.0,
                     ),
                   ),
-                  SizedBox(height: 8.0),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Image(
                         image: AssetImage(
                           "icons/${temperatureIcon}_temperature.png",
                         ),
-                        width: 10.0,
+                        height: 20.0,
                       ),
-                      SizedBox(
-                        width: 4.0,
-                      ),
-                      Text(
-                        temperature,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
+                      Expanded(
+                        child: Text(
+                          temperature,
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ],
@@ -100,18 +99,20 @@ class HourlyWeatherDisplay extends StatelessWidget {
                   ),
                   Text(
                     dateTime,
+                    overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white70,
-                      fontSize: 16.0,
+                      fontSize: 12.0,
                     ),
                   ),
                   Text(
                     day,
+                    overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white60,
-                      fontSize: 12.0,
+                      fontSize: 10.0,
                     ),
                   ),
                 ],

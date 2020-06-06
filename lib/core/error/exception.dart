@@ -9,3 +9,7 @@ class DeviceLocationException implements Exception {}
 class DeviceLocationPermissionException implements Exception {}
 
 class NotFoundException implements Exception {}
+
+class NoLocalDataException implements Exception {}
+
+class UnexpectedException implements Exception {}

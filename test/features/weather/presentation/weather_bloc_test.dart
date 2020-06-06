@@ -95,6 +95,7 @@ void main() {
         final FullWeather tFullWeather = FullWeather(
           timezone: "",
           daytime: "",
+          timezoneSpecificDaytime: "",
           sunrise: "",
           sunriseIn24: "",
           sunset: "",

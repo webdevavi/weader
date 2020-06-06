@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:weader/core/entities/settings.dart';
+import 'package:weader/core/settings/settings_constants.dart';
+import 'package:weader/core/widgets/widgets.dart';
+import 'package:weader/features/settings/presentation/bloc/bloc.dart';
+import 'package:weader/features/settings/presentation/pages/settings_page.dart';
 import 'package:weader/features/time_aware_wallpaper/presentation/bloc/bloc.dart';
 import 'package:weader/features/weather/presentation/widgets/weather_widgets.dart';
 
 import '../../../../core/entities/entities.dart';
-import '../../../../core/settings/settings.dart';
 import '../../../../core/widgets/error_display.dart';
 import '../../../../injector.dart';
 import '../bloc/bloc.dart';
@@ -18,23 +22,33 @@ class WeatherPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => getIt<WeatherBloc>(),
-      child: WeatherPageBlocInit(location: this.location),
+      child: BlocBuilder<SettingsBloc, SettingsState>(
+          builder: (context, settings) {
+        if (settings is SettingsLoaded)
+          return WeatherPageBlocInit(
+            location: this.location,
+            settings: settings.settings,
+          );
+        return Container();
+      }),
     );
   }
 }
 
 class WeatherPageBlocInit extends StatefulWidget {
   final Location location;
+  final Settings settings;
 
-  const WeatherPageBlocInit({Key key, @required this.location})
-      : super(key: key);
+  const WeatherPageBlocInit({
+    Key key,
+    @required this.location,
+    @required this.settings,
+  }) : super(key: key);
   @override
   _WeatherPageBlocInitState createState() => _WeatherPageBlocInitState();
 }
 
 class _WeatherPageBlocInitState extends State<WeatherPageBlocInit> {
-  final Settings settings = Settings();
-
   void getWeather() =>
       BlocProvider.of<WeatherBloc>(context).add(GetWeatherEvent(
         latitude: widget.location.latitude,
@@ -49,6 +63,7 @@ class _WeatherPageBlocInitState extends State<WeatherPageBlocInit> {
   @override
   Widget build(BuildContext context) {
     final location = widget.location;
+    final settings = widget.settings;
     String daytime;
 
     return BlocProvider(
@@ -58,16 +73,16 @@ class _WeatherPageBlocInitState extends State<WeatherPageBlocInit> {
           if (state is WeatherEmpty) {
             return Container();
           } else if (state is WeatherLoading) {
-            return Center(
-              child: CircularProgressIndicator(),
+            return Scaffold(
+              body: LoadingDisplay(),
             );
           } else if (state is WeatherLoaded) {
-            if (settings.dataPreference == DataPreference.TIMEZONE_SPECIFIC)
-              daytime = state.weather.timezoneSpecificDaytime;
-            else
+            if (settings.dataPreference == DataPreference(isLocal: true))
               daytime = state.weather.daytime;
+            else
+              daytime = state.weather.timezoneSpecificDaytime;
 
-            if (settings.wallpaper == Wallpaper.TIME_AWARE) {
+            if (settings.wallpaper == Wallpaper(isTimeAware: true)) {
               BlocProvider.of<TimeAwareWallpaperBloc>(context).add(
                 GetWallpaperEvent(daytime),
               );
@@ -77,8 +92,8 @@ class _WeatherPageBlocInitState extends State<WeatherPageBlocInit> {
                   if (wallpaperState is TimeAwareWallpaperEmpty) {
                     return Container();
                   } else if (wallpaperState is TimeAwareWallpaperLoading) {
-                    return Center(
-                      child: CircularProgressIndicator(),
+                    return Scaffold(
+                      body: LoadingDisplay(),
                     );
                   } else if (wallpaperState is TimeAwareWallpaperLoaded) {
                     return forTimeAwareWallpaper(
@@ -87,7 +102,11 @@ class _WeatherPageBlocInitState extends State<WeatherPageBlocInit> {
                       state,
                     );
                   } else if (wallpaperState is TimeAwareWallpaperError) {
-                    return ErrorDisplay(message: wallpaperState.message);
+                    return Scaffold(
+                      body: ErrorDisplay(
+                        message: wallpaperState.message,
+                      ),
+                    );
                   }
                   return Container();
                 },
@@ -99,7 +118,11 @@ class _WeatherPageBlocInitState extends State<WeatherPageBlocInit> {
               );
             }
           } else if (state is WeatherError) {
-            return ErrorDisplay(message: state.message);
+            return Scaffold(
+              body: ErrorDisplay(
+                message: state.message,
+              ),
+            );
           }
           return Container();
         },
@@ -126,33 +149,11 @@ class _WeatherPageBlocInitState extends State<WeatherPageBlocInit> {
         Container(
           color: Colors.black.withOpacity(0.4),
         ),
-        Scaffold(
+        showScaffoldWithBackground(
           backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0.0,
-            leading: BackButton(),
-            title: Text(location.displayName),
-            actions: <Widget>[
-              IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.add_location),
-              ),
-              IconButton(
-                onPressed: getWeather,
-                icon: Icon(Icons.refresh),
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.settings),
-              )
-            ],
-          ),
-          body: FullWeatherDisplay(
-            location: location,
-            weather: state.weather,
-            settings: settings,
-          ),
+          appBarColor: Colors.transparent,
+          location: location,
+          state: state,
         ),
       ],
     );
@@ -162,8 +163,24 @@ class _WeatherPageBlocInitState extends State<WeatherPageBlocInit> {
     Location location,
     WeatherLoaded state,
   ) {
+    return showScaffoldWithBackground(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      appBarColor: Theme.of(context).appBarTheme.color,
+      location: location,
+      state: state,
+    );
+  }
+
+  Scaffold showScaffoldWithBackground({
+    Color backgroundColor,
+    Color appBarColor,
+    Location location,
+    WeatherLoaded state,
+  }) {
     return Scaffold(
+      backgroundColor: backgroundColor,
       appBar: AppBar(
+        backgroundColor: appBarColor,
         elevation: 0.0,
         leading: BackButton(),
         title: Text(location.displayName),
@@ -177,7 +194,14 @@ class _WeatherPageBlocInitState extends State<WeatherPageBlocInit> {
             icon: Icon(Icons.refresh),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SettingsPage(),
+                ),
+              );
+            },
             icon: Icon(Icons.settings),
           )
         ],
@@ -185,7 +209,7 @@ class _WeatherPageBlocInitState extends State<WeatherPageBlocInit> {
       body: FullWeatherDisplay(
         location: location,
         weather: state.weather,
-        settings: settings,
+        settings: widget.settings,
       ),
     );
   }

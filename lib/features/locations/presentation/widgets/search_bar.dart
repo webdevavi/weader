@@ -19,7 +19,7 @@ class _SearchBarState extends State<SearchBar> {
   Widget build(BuildContext context) {
     return Material(
       elevation: 4.0,
-      color: Colors.deepOrange,
+      color: Theme.of(context).primaryColor,
       child: Padding(
         padding: const EdgeInsets.all(4.0),
         child: ClipRRect(

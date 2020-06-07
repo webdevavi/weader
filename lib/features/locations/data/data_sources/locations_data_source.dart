@@ -1,6 +1,7 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:meta/meta.dart';
 import 'package:weader/core/error/exception.dart';
+import 'package:weader/core/util/unique_id_generator.dart';
 
 import '../models/locations_list_model.dart';
 
@@ -18,8 +19,12 @@ abstract class LocationsDataSource {
 
 class LocationsDataSourceImpl implements LocationsDataSource {
   final Geolocator geolocator;
+  final UniqueIdGenerator uniqueIdGenerator;
 
-  LocationsDataSourceImpl({@required this.geolocator});
+  LocationsDataSourceImpl({
+    @required this.geolocator,
+    @required this.uniqueIdGenerator,
+  });
   @override
   Future<LocationsListModel> getDeviceLocationsList() async {
     final position = await geolocator.getCurrentPosition();
@@ -30,7 +35,10 @@ class LocationsDataSourceImpl implements LocationsDataSource {
       );
 
       if (placemarks != null)
-        return LocationsListModel.fromData(placemarks);
+        return LocationsListModel.fromData(
+          data: placemarks,
+          uniqueIdGenerator: uniqueIdGenerator,
+        );
       else
         throw NotFoundException();
     } else
@@ -42,7 +50,10 @@ class LocationsDataSourceImpl implements LocationsDataSource {
     try {
       final placemarks = await geolocator.placemarkFromAddress(queryString);
       if (placemarks != null)
-        return LocationsListModel.fromData(placemarks);
+        return LocationsListModel.fromData(
+          data: placemarks,
+          uniqueIdGenerator: uniqueIdGenerator,
+        );
       else
         throw NotFoundException();
     } on Exception {

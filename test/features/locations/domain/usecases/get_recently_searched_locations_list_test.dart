@@ -5,17 +5,17 @@ import 'package:weader/core/entities/entities.dart';
 import 'package:weader/core/usecases/usecase.dart';
 import 'package:weader/features/locations/domain/entities/locations_list.dart';
 import 'package:weader/features/locations/domain/repository/locations_repository.dart';
-import 'package:weader/features/locations/domain/usecases/get_device_locations_list.dart';
+import 'package:weader/features/locations/domain/usecases/get_recently_searched_locations_list.dart';
 
 class MockLocationsRepository extends Mock implements LocationsRepository {}
 
 void main() {
-  GetDeviceLocationsList usecase;
+  GetRecentlySearchedLocationsList usecase;
   MockLocationsRepository mockLocationsRepository;
 
   setUp(() {
     mockLocationsRepository = MockLocationsRepository();
-    usecase = GetDeviceLocationsList(mockLocationsRepository);
+    usecase = GetRecentlySearchedLocationsList(mockLocationsRepository);
   });
 
   final tLocationsList = LocationsList(
@@ -31,16 +31,16 @@ void main() {
   );
 
   test(
-    'should get device locations list from repository',
+    'should get recently searched locations list from repository',
     () async {
       // arrange
-      when(mockLocationsRepository.getDeviceLocationsList())
+      when(mockLocationsRepository.getRecentlySearchedLocationsList())
           .thenAnswer((_) async => Right(tLocationsList));
       // act
       final result = await usecase(NoParams());
       // assert
       expect(result, equals(Right(tLocationsList)));
-      verify(mockLocationsRepository.getDeviceLocationsList());
+      verify(mockLocationsRepository.getRecentlySearchedLocationsList());
       verifyNoMoreInteractions(mockLocationsRepository);
     },
   );

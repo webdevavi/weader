@@ -5,4 +5,9 @@ import 'package:weader/features/locations/domain/entities/locations_list.dart';
 abstract class LocationsRepository {
   Future<Either<Failure, LocationsList>> getLocationsList(String queryString);
   Future<Either<Failure, LocationsList>> getDeviceLocationsList();
+  Future<Either<Failure, LocationsList>> getRecentlySearchedLocationsList();
+  Future<Either<Failure, LocationsList>> clearOneRecentlySearchedLocation(
+    String id,
+  );
+  Future<Either<Failure, bool>> clearAllRecentlySearchedLocation();
 }

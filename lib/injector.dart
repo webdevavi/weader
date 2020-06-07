@@ -5,12 +5,18 @@ import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/timezone.dart';
+import 'package:uuid/uuid.dart';
+import 'package:weader/core/util/unique_id_generator.dart';
+import 'package:weader/features/locations/domain/usecases/clear_all_recently_searched_locations_list.dart';
+import 'package:weader/features/locations/domain/usecases/clear_one_recently_searched_location.dart';
+import 'package:weader/features/locations/domain/usecases/get_recently_searched_locations_list.dart';
 
 import 'core/network/network_info.dart';
 import 'core/util/datetime_converter.dart';
 import 'core/util/input_checker.dart';
 import 'core/util/unit_converter.dart';
 import 'features/locations/data/data_sources/locations_data_source.dart';
+import 'features/locations/data/data_sources/locations_local_data_source.dart';
 import 'features/locations/data/repository/locations_repository_impl.dart';
 import 'features/locations/domain/repository/locations_repository.dart';
 import 'features/locations/domain/usecases/get_device_locations_list.dart';
@@ -54,13 +60,20 @@ Future<void> init() async {
     () => http.Client(),
   );
 
+  getIt.registerLazySingleton(
+    () => Uuid(),
+  );
+
   //! Features - Locations
   // BLoC
   getIt.registerFactory(
     () => LocationsBloc(
       getDeviceLocationsList: getIt(),
       getLocationsList: getIt(),
+      getRecentlySearchedLocationsList: getIt(),
       inputChecker: getIt(),
+      clearAllRecentlySearchedLocationsList: getIt(),
+      clearOneRecentlySearchedLocation: getIt(),
     ),
   );
 
@@ -77,11 +90,30 @@ Future<void> init() async {
     ),
   );
 
+  getIt.registerLazySingleton(
+    () => GetRecentlySearchedLocationsList(
+      getIt(),
+    ),
+  );
+
+  getIt.registerLazySingleton(
+    () => ClearOneRecentlySearchedLocation(
+      getIt(),
+    ),
+  );
+
+  getIt.registerLazySingleton(
+    () => ClearAllRecentlySearchedLocationsList(
+      getIt(),
+    ),
+  );
+
   // repository
   getIt.registerLazySingleton<LocationsRepository>(
     () => LocationsRepositoryImpl(
       dataSource: getIt(),
       networkInfo: getIt(),
+      localDataSource: getIt(),
     ),
   );
 
@@ -89,6 +121,13 @@ Future<void> init() async {
   getIt.registerLazySingleton<LocationsDataSource>(
     () => LocationsDataSourceImpl(
       geolocator: getIt(),
+      uniqueIdGenerator: getIt(),
+    ),
+  );
+
+  getIt.registerLazySingleton<LocationsLocalDataSource>(
+    () => LocationsLocalDataSourceImpl(
+      sharedPreferences: getIt(),
     ),
   );
 
@@ -201,6 +240,12 @@ Future<void> init() async {
 
   getIt.registerLazySingleton(
     () => DateTimeConverter(),
+  );
+
+  getIt.registerLazySingleton(
+    () => UniqueIdGenerator(
+      getIt(),
+    ),
   );
 
   getIt.registerLazySingleton(

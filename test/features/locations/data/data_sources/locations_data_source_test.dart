@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:mockito/mockito.dart';
 import 'package:weader/core/error/exception.dart';
+import 'package:weader/core/util/unique_id_generator.dart';
 import 'package:weader/features/locations/data/data_sources/locations_data_source.dart';
 import 'package:weader/features/locations/data/models/location_model.dart';
 import 'package:weader/features/locations/data/models/locations_list_model.dart';
@@ -11,13 +12,18 @@ import '../../../../fixtures/fixtures.dart';
 
 class MockGeolocator extends Mock implements Geolocator {}
 
+class MockUniqueIdGenerator extends Mock implements UniqueIdGenerator {}
+
 void main() {
   LocationsDataSourceImpl dataSource;
   MockGeolocator mockGeolocator;
+  MockUniqueIdGenerator mockUniqueIdGenerator;
 
   setUp(() {
     mockGeolocator = MockGeolocator();
+    mockUniqueIdGenerator = MockUniqueIdGenerator();
     dataSource = LocationsDataSourceImpl(
+      uniqueIdGenerator: mockUniqueIdGenerator,
       geolocator: mockGeolocator,
     );
   });
@@ -25,6 +31,7 @@ void main() {
   final tLocationsListModel = LocationsListModel(
     locationsList: [
       LocationModel(
+        id: "cdef4a60-a821-11ea-fbdc-4fc75fc69aa5",
         address: 'Bengaluru, Bengaluru Urban, Karnataka, India',
         displayName: 'Bengaluru',
         latitude: 12.9715987,
@@ -46,7 +53,9 @@ void main() {
 
           when(mockGeolocator.placemarkFromAddress(any))
               .thenAnswer((_) => locationsList);
-
+          when(mockUniqueIdGenerator.getId).thenReturn(
+            "cdef4a60-a821-11ea-fbdc-4fc75fc69aa5",
+          );
           // act
           final result = await dataSource.getLocationsList(tQueryString);
           // assert
@@ -87,6 +96,9 @@ void main() {
         when(mockGeolocator.getCurrentPosition()).thenAnswer((_) => position);
         when(mockGeolocator.placemarkFromCoordinates(any, any))
             .thenAnswer((_) => locationsList);
+        when(mockUniqueIdGenerator.getId).thenReturn(
+          "cdef4a60-a821-11ea-fbdc-4fc75fc69aa5",
+        );
         // act
         final result = await dataSource.getDeviceLocationsList();
         // assert

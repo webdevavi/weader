@@ -18,7 +18,7 @@ class ErrorDisplay extends StatelessWidget {
                 children: <Widget>[
                   Icon(
                     Icons.info_outline,
-                    color: Colors.redAccent,
+                    color: Theme.of(context).errorColor,
                   ),
                   SizedBox(
                     height: 10.0,
@@ -29,7 +29,7 @@ class ErrorDisplay extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.bold,
-                      color: Colors.redAccent,
+                      color: Theme.of(context).errorColor,
                     ),
                   ),
                 ],

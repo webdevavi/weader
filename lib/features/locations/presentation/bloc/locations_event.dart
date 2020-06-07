@@ -18,3 +18,21 @@ class GetDeviceLocationsListEvent extends LocationsEvent {
   @override
   List<Object> get props => [];
 }
+
+class GetRecentlySearchedLocationsListEvent extends LocationsEvent {
+  @override
+  List<Object> get props => [];
+}
+
+class ClearOneRecentlySearchedLocationEvent extends LocationsEvent {
+  final String id;
+
+  ClearOneRecentlySearchedLocationEvent({@required this.id});
+  @override
+  List<Object> get props => [];
+}
+
+class ClearAllRecentlySearchedLocationsListEvent extends LocationsEvent {
+  @override
+  List<Object> get props => [];
+}

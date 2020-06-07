@@ -6,12 +6,14 @@ class Location extends Equatable {
   final String address;
   final double latitude;
   final double longitude;
+  final String id;
 
   Location({
     @required this.displayName,
     @required this.address,
     @required this.latitude,
     @required this.longitude,
+    @required this.id,
   });
 
   @override
@@ -20,5 +22,6 @@ class Location extends Equatable {
         address,
         latitude,
         longitude,
+        id,
       ];
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:weader/core/entities/settings.dart';
-import 'package:weader/core/settings/settings_constants.dart';
 import 'package:weader/core/widgets/widgets.dart';
 import 'package:weader/features/settings/presentation/bloc/bloc.dart';
 import 'package:weader/features/settings/presentation/pages/settings_page.dart';

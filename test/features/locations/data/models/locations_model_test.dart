@@ -1,12 +1,25 @@
+import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
+import 'package:weader/core/util/unique_id_generator.dart';
 import 'package:weader/features/locations/data/models/location_model.dart';
 import 'package:weader/features/locations/data/models/locations_list_model.dart';
 import 'package:weader/features/locations/domain/entities/locations_list.dart';
 
+import '../../../../fixtures/fixture_reader.dart';
 import '../../../../fixtures/fixtures.dart';
 
+class MockUniqueIdGenerator extends Mock implements UniqueIdGenerator {}
+
 void main() {
+  MockUniqueIdGenerator mockUniqueIdGenerator;
+
+  setUp(() {
+    mockUniqueIdGenerator = MockUniqueIdGenerator();
+  });
   final tLocationModel = LocationModel(
+    id: "cdef4a60-a821-11ea-fbdc-4fc75fc69aa5",
     address: 'Bengaluru, Bengaluru Urban, Karnataka, India',
     displayName: 'Bengaluru',
     latitude: 12.9715987,
@@ -15,11 +28,14 @@ void main() {
   final tLocationsListModel = LocationsListModel(
     locationsList: [tLocationModel],
   );
-  final tJson = {
-    "address": 'Bengaluru, Bengaluru Urban, Karnataka, India',
-    "display_name": 'Bengaluru',
+  final tJsonList =
+      json.decode(fixture('recently_searched_locations_list.json'));
+  final tJsonmap = {
+    "id": "cdef4a60-a821-11ea-fbdc-4fc75fc69aa5",
+    "address": "Bengaluru, Bengaluru Urban, Karnataka, India",
+    "display_name": "Bengaluru",
     "latitude": 12.9715987,
-    "longitude": 77.5945627,
+    "longitude": 77.5945627
   };
 
   test(
@@ -39,8 +55,15 @@ void main() {
       test(
         'should return a valid model',
         () async {
+          // arrange
+          when(mockUniqueIdGenerator.getId).thenReturn(
+            "cdef4a60-a821-11ea-fbdc-4fc75fc69aa5",
+          );
           // act
-          final result = LocationsListModel.fromData(locationListFixture);
+          final result = LocationsListModel.fromData(
+            data: locationListFixture,
+            uniqueIdGenerator: mockUniqueIdGenerator,
+          );
           // assert
           expect(
             result,
@@ -58,7 +81,7 @@ void main() {
         'should return a valid model',
         () async {
           // act
-          final result = LocationsListModel.fromJson([tJson]);
+          final result = LocationsListModel.fromJson(tJsonList);
 
           //assert
           expect(
@@ -82,7 +105,7 @@ void main() {
           // assert
           expect(
             result,
-            [tJson],
+            tJsonList,
           );
         },
       );
@@ -103,7 +126,7 @@ void main() {
 
           expect(
             result,
-            tJson,
+            tJsonmap,
           );
         },
       );

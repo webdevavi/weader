@@ -1,5 +1,6 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:meta/meta.dart';
+import 'package:weader/core/util/unique_id_generator.dart';
 
 import '../../domain/entities/locations_list.dart';
 import 'location_model.dart';
@@ -11,10 +12,16 @@ class LocationsListModel extends LocationsList {
           locationsList: locationsList,
         );
 
-  factory LocationsListModel.fromData(List<Placemark> data) {
+  factory LocationsListModel.fromData(
+      {List<Placemark> data, UniqueIdGenerator uniqueIdGenerator}) {
     List<LocationModel> _list = List<LocationModel>();
 
-    _list = data.map((location) => LocationModel.fromData(location)).toList();
+    _list = data
+        .map((location) => LocationModel.fromData(
+              data: location,
+              uniqueIdGenerator: uniqueIdGenerator,
+            ))
+        .toList();
 
     return LocationsListModel(locationsList: _list);
   }
@@ -32,6 +39,7 @@ class LocationsListModel extends LocationsList {
     locationsList.forEach(
       (i) => _list.add(
         {
+          "id": i.id,
           "display_name": i.displayName,
           "address": i.address,
           "latitude": i.latitude,

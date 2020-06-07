@@ -26,6 +26,22 @@ class LocationsLoaded extends LocationsState {
   List<Object> get props => [locationsList];
 }
 
+class LocationsRecentlySearched extends LocationsState {
+  final LocationsList recentlySearchedLocationsList;
+
+  LocationsRecentlySearched({@required this.recentlySearchedLocationsList});
+  @override
+  List<Object> get props => [recentlySearchedLocationsList];
+}
+
+class LocationsRecentlySearchedCleared extends LocationsState {
+  final bool locationsRecentlySearchedCleared;
+
+  LocationsRecentlySearchedCleared({this.locationsRecentlySearchedCleared});
+  @override
+  List<Object> get props => [locationsRecentlySearchedCleared];
+}
+
 class LocationsError extends LocationsState {
   final String message;
 

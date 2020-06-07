@@ -21,6 +21,7 @@ void main() {
   final tLocationsList = LocationsList(
     locationsList: [
       Location(
+        id: "cdef4a60-a821-11ea-fbdc-4fc75fc69aa5",
         address: 'Karnataka, India',
         displayName: 'Bengaluru',
         latitude: 1.0,

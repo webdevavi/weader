@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weader/core/pages/home_page.dart';
 
 import 'core/themes/themes.dart';
-import 'core/widgets/error_display.dart';
 import 'features/locations/presentation/pages/locations_pages.dart';
 import 'features/settings/presentation/bloc/bloc.dart';
 import 'injector.dart' as di;
@@ -53,7 +53,7 @@ class _AppState extends State<App> {
         debugShowCheckedModeBanner: false,
         title: 'Weader',
         theme: theme(),
-        home: SearchPage(),
+        home: HomePage(),
       );
     });
   }

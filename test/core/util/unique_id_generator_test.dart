@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:uuid/uuid.dart';
-import 'package:weader/core/util/unique_id_generator.dart';
+import 'package:Weader/core/util/unique_id_generator.dart';
 
 class MockUuid extends Mock implements Uuid {}
 

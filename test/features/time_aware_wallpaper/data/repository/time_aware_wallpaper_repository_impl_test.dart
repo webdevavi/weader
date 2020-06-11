@@ -1,12 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:weader/core/error/exception.dart';
-import 'package:weader/core/error/failures.dart';
-import 'package:weader/core/network/network_info.dart';
-import 'package:weader/features/time_aware_wallpaper/data/datasources/time_aware_wallpaper_remote_data_source.dart';
-import 'package:weader/features/time_aware_wallpaper/data/models/time_aware_wallpaper_model.dart';
-import 'package:weader/features/time_aware_wallpaper/data/repository/time_aware_wallpaper_repository_impl.dart';
+import 'package:Weader/core/error/exception.dart';
+import 'package:Weader/core/error/failures.dart';
+import 'package:Weader/core/network/network_info.dart';
+import 'package:Weader/features/time_aware_wallpaper/data/datasources/time_aware_wallpaper_remote_data_source.dart';
+import 'package:Weader/features/time_aware_wallpaper/data/models/time_aware_wallpaper_model.dart';
+import 'package:Weader/features/time_aware_wallpaper/data/repository/time_aware_wallpaper_repository_impl.dart';
 
 class MockRemoteDataSource extends Mock
     implements TimeAwareWallpaperRemoteDataSource {}

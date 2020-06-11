@@ -1,10 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
-import 'package:weader/core/error/exception.dart';
-import 'package:weader/core/keys/keys.dart';
-import 'package:weader/features/time_aware_wallpaper/data/datasources/time_aware_wallpaper_remote_data_source.dart';
-import 'package:weader/features/time_aware_wallpaper/data/models/time_aware_wallpaper_model.dart';
+import 'package:Weader/core/error/exception.dart';
+import 'package:Weader/core/keys/keys.dart';
+import 'package:Weader/features/time_aware_wallpaper/data/datasources/time_aware_wallpaper_remote_data_source.dart';
+import 'package:Weader/features/time_aware_wallpaper/data/models/time_aware_wallpaper_model.dart';
 import 'package:matcher/matcher.dart';
 import '../../../../fixtures/fixture_reader.dart';
 

@@ -2,10 +2,10 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:weader/core/error/failures.dart';
-import 'package:weader/features/time_aware_wallpaper/domain/entity/time_aware_wallpaper.dart';
-import 'package:weader/features/time_aware_wallpaper/domain/usecases/get_wallpaper.dart';
-import 'package:weader/features/time_aware_wallpaper/presentation/bloc/bloc.dart';
+import 'package:Weader/core/error/failures.dart';
+import 'package:Weader/features/time_aware_wallpaper/domain/entity/time_aware_wallpaper.dart';
+import 'package:Weader/features/time_aware_wallpaper/domain/usecases/get_wallpaper.dart';
+import 'package:Weader/features/time_aware_wallpaper/presentation/bloc/bloc.dart';
 
 class MockGetWallpaper extends Mock implements GetWallpaper {}
 

@@ -1,4 +1,4 @@
-import 'package:weader/features/time_aware_wallpaper/domain/entity/time_aware_wallpaper.dart';
+import '../../domain/entity/time_aware_wallpaper.dart';
 
 class TimeAwareWallpaperModel extends TimeAwareWallpaper {
   TimeAwareWallpaperModel(

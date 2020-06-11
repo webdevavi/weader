@@ -4,10 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:weader/core/error/exception.dart';
-import 'package:weader/core/settings/initial_settings.dart';
-import 'package:weader/features/settings/data/data_sources/settings_local_data_source.dart';
-import 'package:weader/features/settings/data/models/settings_model.dart';
+import 'package:Weader/core/error/exception.dart';
+import 'package:Weader/core/settings/initial_settings.dart';
+import 'package:Weader/features/settings/data/data_sources/settings_local_data_source.dart';
+import 'package:Weader/features/settings/data/models/settings_model.dart';
 import 'package:matcher/matcher.dart';
 
 import '../../../../fixtures/fixture_reader.dart';
@@ -97,24 +97,11 @@ void main() {
       );
 
       test(
-        'should return the saved settings',
-        () async {
-          // act
-          final result = await dataSource.setSettings(tSettingsModel);
-          // assert
-          expect(result, equals(tSettingsModel));
-        },
-      );
-
-      test(
-        'should throw [UnexpectedException] for any exception',
+        'should throw [UnexpectedException] if saving data fails',
         () async {
           // arrange
-          when(mockSharedPreferences.setString(any, any)).thenThrow(
-            PlatformException(
-              code: "101",
-            ),
-          );
+          when(mockSharedPreferences.setString(any, any))
+              .thenAnswer((_) async => Future.value(false));
           // act
           final call = dataSource.setSettings;
           // assert

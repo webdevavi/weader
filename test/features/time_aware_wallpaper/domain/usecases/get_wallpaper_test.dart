@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:weader/features/time_aware_wallpaper/domain/entity/time_aware_wallpaper.dart';
-import 'package:weader/features/time_aware_wallpaper/domain/repository/time_aware_wallpaper_repository.dart';
-import 'package:weader/features/time_aware_wallpaper/domain/usecases/get_wallpaper.dart';
+import 'package:Weader/features/time_aware_wallpaper/domain/entity/time_aware_wallpaper.dart';
+import 'package:Weader/features/time_aware_wallpaper/domain/repository/time_aware_wallpaper_repository.dart';
+import 'package:Weader/features/time_aware_wallpaper/domain/usecases/get_wallpaper.dart';
 
 class MockTimeAwareWallpaperRepository extends Mock
     implements TimeAwareWallpaperRepository {}

@@ -13,3 +13,5 @@ class NotFoundException implements Exception {}
 class NoLocalDataException implements Exception {}
 
 class UnexpectedException implements Exception {}
+
+class LocationAlreadySavedException implements Exception {}

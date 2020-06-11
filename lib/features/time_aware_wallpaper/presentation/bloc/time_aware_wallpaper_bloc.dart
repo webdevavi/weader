@@ -1,8 +1,10 @@
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
-import 'package:weader/core/error/failures.dart';
-import 'package:weader/features/time_aware_wallpaper/domain/usecases/get_wallpaper.dart';
+
 import './bloc.dart';
+import '../../../../core/error/failures.dart';
+import '../../domain/usecases/get_wallpaper.dart';
 
 class TimeAwareWallpaperBloc
     extends Bloc<TimeAwareWallpaperEvent, TimeAwareWallpaperState> {

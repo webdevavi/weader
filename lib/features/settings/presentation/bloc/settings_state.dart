@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:weader/core/entities/settings.dart';
+
+import '../../../../core/entities/settings.dart';
 
 @immutable
 abstract class SettingsState extends Equatable {

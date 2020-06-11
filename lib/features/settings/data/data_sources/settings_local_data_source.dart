@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:weader/core/error/exception.dart';
-import 'package:weader/core/settings/initial_settings.dart';
 
+import '../../../../core/error/exception.dart';
+import '../../../../core/settings/initial_settings.dart';
 import '../models/settings_model.dart';
 
 const SETTINGS = "SETTINGS";
@@ -20,7 +20,7 @@ abstract class SettingsLocalDataSource {
   /// Sets the [SettingsModel] to local storage
   ///
   /// Throws [UnexpectedException] for any exception
-  Future<SettingsModel> setSettings(SettingsModel settings);
+  Future<void> setSettings(SettingsModel settings);
 }
 
 class SettingsLocalDataSourceImpl implements SettingsLocalDataSource {
@@ -41,12 +41,11 @@ class SettingsLocalDataSourceImpl implements SettingsLocalDataSource {
   }
 
   @override
-  Future<SettingsModel> setSettings(SettingsModel settings) {
-    try {
-      sharedPreferences.setString(SETTINGS, json.encode(settings.toJson()));
-      return Future.value(settings);
-    } on Exception {
-      throw UnexpectedException();
-    }
+  Future<void> setSettings(SettingsModel settings) async {
+    final result = await sharedPreferences.setString(
+      SETTINGS,
+      json.encode(settings.toJson()),
+    );
+    if (result == false) throw UnexpectedException();
   }
 }

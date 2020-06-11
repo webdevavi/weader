@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weader/core/pages/home_page.dart';
 
+import 'core/pages/splash_page.dart';
 import 'core/themes/themes.dart';
-import 'features/locations/presentation/pages/locations_pages.dart';
+import 'features/save_locations/presentation/bloc/bloc.dart';
+import 'features/search_locations/presentation/bloc/bloc.dart';
 import 'features/settings/presentation/bloc/bloc.dart';
+import 'features/time_aware_wallpaper/presentation/bloc/bloc.dart';
+import 'features/weather_for_one_location/presentation/bloc/bloc.dart';
+import 'features/weather_for_saved_locations/presentation/bloc/bloc.dart';
+import 'home_page.dart';
 import 'injector.dart' as di;
 
 Future<void> main() async {
@@ -16,10 +21,16 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => di.getIt<SettingsBloc>(),
-      child: App(),
-    );
+    return MultiBlocProvider(providers: [
+      BlocProvider(create: (context) => di.getIt<SettingsBloc>()),
+      BlocProvider(create: (context) => di.getIt<SearchLocationsBloc>()),
+      BlocProvider(create: (context) => di.getIt<WeatherForOneLocationBloc>()),
+      BlocProvider(
+        create: (context) => di.getIt<WeatherForSavedLocationsBloc>(),
+      ),
+      BlocProvider(create: (context) => di.getIt<TimeAwareWallpaperBloc>()),
+      BlocProvider(create: (context) => di.getIt<SaveLocationsBloc>()),
+    ], child: App());
   }
 }
 
@@ -41,20 +52,24 @@ class _AppState extends State<App> {
       context,
       state,
     ) {
-      ThemeData theme() {
-        if (state is SettingsLoaded) {
-          if (state.settings.currentTheme.isDark)
-            return appThemeData[AppTheme.Dark];
-        }
-        return appThemeData[AppTheme.Light];
-      }
-
-      return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Weader',
-        theme: theme(),
-        home: HomePage(),
-      );
+      if (state is SettingsLoading)
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Weader',
+          home: SplashPage(),
+        );
+      else if (state is SettingsLoaded)
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Weader',
+          theme: _getTheme(state),
+          home: HomePage(),
+        );
     });
+  }
+
+  ThemeData _getTheme(SettingsLoaded state) {
+    if (state.settings.currentTheme.isDark) return appThemeData[AppTheme.Dark];
+    return appThemeData[AppTheme.Light];
   }
 }

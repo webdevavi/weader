@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:weader/features/time_aware_wallpaper/data/models/time_aware_wallpaper_model.dart';
-import 'package:weader/features/time_aware_wallpaper/domain/entity/time_aware_wallpaper.dart';
+import 'package:Weader/features/time_aware_wallpaper/data/models/time_aware_wallpaper_model.dart';
+import 'package:Weader/features/time_aware_wallpaper/domain/entity/time_aware_wallpaper.dart';
 
 import '../../../../fixtures/fixture_reader.dart';
 

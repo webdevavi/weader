@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:weader/core/entities/settings.dart';
-import 'package:weader/features/settings/data/models/settings_model.dart';
+import 'package:Weader/core/entities/settings.dart';
+import 'package:Weader/features/settings/data/models/settings_model.dart';
 
 import '../../../../fixtures/fixture_reader.dart';
 

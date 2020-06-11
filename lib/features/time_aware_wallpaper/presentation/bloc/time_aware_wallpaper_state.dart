@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:weader/features/time_aware_wallpaper/domain/entity/time_aware_wallpaper.dart';
+
+import '../../domain/entity/time_aware_wallpaper.dart';
 
 @immutable
 abstract class TimeAwareWallpaperState extends Equatable {

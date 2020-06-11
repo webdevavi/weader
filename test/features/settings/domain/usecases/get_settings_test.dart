@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:weader/core/entities/settings.dart';
-import 'package:weader/core/usecases/usecase.dart';
-import 'package:weader/features/settings/domain/repository/settings_repository.dart';
-import 'package:weader/features/settings/domain/usecases/get_settings.dart';
+import 'package:Weader/core/entities/settings.dart';
+import 'package:Weader/core/usecases/usecase.dart';
+import 'package:Weader/features/settings/domain/repository/settings_repository.dart';
+import 'package:Weader/features/settings/domain/usecases/get_settings.dart';
 
 class MockSettingsRepository extends Mock implements SettingsRepository {}
 

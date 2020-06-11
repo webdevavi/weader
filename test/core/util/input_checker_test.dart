@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:weader/core/error/failures.dart';
-import 'package:weader/core/util/input_checker.dart';
+import 'package:Weader/core/error/failures.dart';
+import 'package:Weader/core/util/input_checker.dart';
 
 void main() {
   InputChecker inputChecker;

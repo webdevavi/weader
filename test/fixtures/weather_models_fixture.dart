@@ -1,4 +1,4 @@
-import 'package:weader/features/weather/data/models/weather_models.dart';
+import 'package:Weader/core/models/models.dart';
 
 final tCurrent = WeatherModel(
   dateTime: '11:46 PM',

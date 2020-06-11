@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
-import 'package:weader/core/error/exception.dart';
 
+import '../../../../core/error/exception.dart';
 import '../../../../core/keys/keys.dart';
 import '../models/time_aware_wallpaper_model.dart';
 

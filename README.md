@@ -1,6 +1,5 @@
 # **Weader**
-
-version 1.0.0
+Version 1.0.0
 
 A complete weather forecast app for android which supports almost every location on the planet earth. 
 You can search for any location and see the current weather along with hourly weather forecast for 
@@ -35,6 +34,24 @@ Run the following command in your terminal.
 `$ flutter run`
 
 Check out Flutter’s online [documentation](https://flutter.io/, "https://flutter.io/") for help getting start with your Flutter project.
+
+## Download
+
+### For separate ARMs
+
+| Arm        | Download                                                                                                                                                                                           |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ARM 32-bit | ([Download Weader](https://firebasestorage.googleapis.com/v0/b/weader-app.appspot.com/o/android%2Fapp-armeabi-v7a-release.apk?alt=media&token=55971f90-2254-4933-8f43-272f7d324d8e, "armeabi-v7a") |
+| ARM 64-bit | ([Download Weader](https://firebasestorage.googleapis.com/v0/b/weader-app.appspot.com/o/android%2Fapp-arm64-v8a-release.apk?alt=media&token=0d8bfdad-4d49-478e-bbab-ce4b2179e522, "arm64-v8a")     |
+| x86 64-bit | [Download Weader](https://firebasestorage.googleapis.com/v0/b/weader-app.appspot.com/o/android%2Fapp-x86_64-release.apk?alt=media&token=a573c9d5-1f51-4007-9cbb-1daf723488c3, "x86_64")            |
+
+### For all arms
+
+If you don't know which arm your android device supports, you can download this version.
+
+**Note:** This apk file will be larger in size since all the arms are combined as one.
+
+[Download Weather]()
 
 ## License
 

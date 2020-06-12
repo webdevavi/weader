@@ -11,7 +11,7 @@ final appThemeData = {
     primaryColor: Colors.deepOrange,
     primaryColorDark: Colors.deepOrange[800],
     accentColor: Colors.teal,
-    scaffoldBackgroundColor: Colors.white.withOpacity(0.8),
+    scaffoldBackgroundColor: Colors.white,
     appBarTheme: AppBarTheme(
       color: Colors.transparent,
       elevation: 0.0,

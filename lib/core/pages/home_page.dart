@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'core/entities/entities.dart';
-import 'core/snack_bar/show_snack_bar.dart';
-import 'core/widgets/widgets.dart';
-import 'features/save_locations/presentation/bloc/bloc.dart';
-import 'features/search_locations/presentation/pages/search_page.dart';
-import 'features/settings/presentation/bloc/bloc.dart';
-import 'features/settings/presentation/pages/settings_page.dart';
-import 'features/weather_for_saved_locations/presentation/bloc/bloc.dart';
-import 'features/weather_for_saved_locations/presentation/widgets/weather_for_saved_locations_display.dart';
+import '../../features/save_locations/presentation/bloc/bloc.dart';
+import '../../features/search_locations/presentation/pages/search_page.dart';
+import '../../features/settings/presentation/bloc/bloc.dart';
+import '../../features/settings/presentation/pages/settings_page.dart';
+import '../../features/weather_for_saved_locations/presentation/bloc/bloc.dart';
+import '../../features/weather_for_saved_locations/presentation/widgets/weather_for_saved_locations_display.dart';
+import '../entities/entities.dart';
+import '../snack_bar/show_snack_bar.dart';
+import '../widgets/widgets.dart';
 
 class HomePage extends StatefulWidget {
   @override

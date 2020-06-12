@@ -46,7 +46,8 @@ class WeatherForSavedLocationsDisplay extends StatelessWidget {
           SizedBox(height: 8.0),
           Expanded(
             child: ListView.builder(
-              itemCount: locationsList.locationsList.length,
+              itemCount: weatherForSavedLocationsLoadedState
+                  .fullWeatherList.fullWeatherList.length,
               itemBuilder: (thisContext, index) {
                 FullWeather weather = weatherForSavedLocationsLoadedState
                     .fullWeatherList.fullWeatherList[index];

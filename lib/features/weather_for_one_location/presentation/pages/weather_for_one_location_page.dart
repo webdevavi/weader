@@ -128,6 +128,7 @@ class _WeatherForOneLocationPageState extends State<WeatherForOneLocationPage> {
           color: Colors.black.withOpacity(0.4),
         ),
         showScaffoldWithBackground(
+          backgroundColor: Colors.transparent,
           location: location,
           state: state,
           settings: settings,
@@ -142,7 +143,6 @@ class _WeatherForOneLocationPageState extends State<WeatherForOneLocationPage> {
     Settings settings,
   ) {
     return showScaffoldWithBackground(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       location: location,
       state: state,
       settings: settings,
@@ -150,11 +150,20 @@ class _WeatherForOneLocationPageState extends State<WeatherForOneLocationPage> {
   }
 
   Scaffold showScaffoldWithBackground({
-    Color backgroundColor = Colors.transparent,
+    Color backgroundColor,
     Location location,
     WeatherForOneLocationLoaded state,
     Settings settings,
   }) {
+    IconThemeData iconThemeData() {
+      if (settings.wallpaper.isTimeAware)
+        return IconThemeData(color: Colors.white);
+    }
+
+    TextStyle textStyle() {
+      if (settings.wallpaper.isTimeAware) return TextStyle(color: Colors.white);
+    }
+
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
@@ -162,7 +171,11 @@ class _WeatherForOneLocationPageState extends State<WeatherForOneLocationPage> {
           onPressed: () => Navigator.of(context).pop(),
           icon: Icon(Icons.arrow_back),
         ),
-        title: Text(location.displayName),
+        iconTheme: iconThemeData(),
+        title: Text(
+          location.displayName,
+          style: textStyle(),
+        ),
         actions: <Widget>[
           SaveLocationButton(location: location),
           SmallIconButton(

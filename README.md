@@ -51,7 +51,7 @@ If you don't know which arm your android device supports, you can download this 
 
 **Note:** This apk file will be larger in size since all the arms are combined as one.
 
-[Download Weather](https://drive.google.com/file/d/1Jca64_Ehja_lCXeCasIx1N1Bd3gOWYtH/view?usp=sharing)
+[Download Weader](https://drive.google.com/file/d/1Jca64_Ehja_lCXeCasIx1N1Bd3gOWYtH/view?usp=sharing)
 
 ## License
 
